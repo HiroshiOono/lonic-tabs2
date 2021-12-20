@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { BannerAdOptions, BannerAdSize, BannerAdPosition} from '@capacitor-community/admob';
+import { Badge } from '@ionic-native/badge/ngx'; 
 
 @Component({
   selector: 'app-tab2',
@@ -9,8 +10,16 @@ import { BannerAdOptions, BannerAdSize, BannerAdPosition} from '@capacitor-commu
 })
 export class Tab2Page {
   isAdsense = false;
-  constructor() {}
+  constructor(public badge: Badge) {}
   
+  upBadge(){
+    this.badge.increase(1);
+  }
+
+  clearbadge(){
+    this.badge.clear();
+  }
+
   displayAdMob(){
     const options: BannerAdOptions = {
       adId: 'ca-app-pub-3940256099942544/6300978111',
@@ -25,7 +34,7 @@ export class Tab2Page {
   }
 
   hideAdMob(){
-    Plugins.AdMob.hideBannar().then(
+    Plugins.AdMob.hideBanner().then(
       success => this.isAdsense = true
     );
 
